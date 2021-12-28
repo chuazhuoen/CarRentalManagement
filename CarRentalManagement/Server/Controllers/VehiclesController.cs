@@ -31,8 +31,8 @@ namespace CarRentalManagement.Server.Controllers
         public async Task<IActionResult> GetVehicles()
         {
             // return await _context.Vehicles.ToListAsync();
-            var Vehicles = await _unitOfWork.Vehicles.GetAll();
-            return Ok(Vehicles);
+            var vehicles = await _unitOfWork.Vehicles.GetAll(includes: q => q.Include(x => x.Make).Include(x => x.Model).Include(x => x.Colour));
+            return Ok(vehicles);
         }
 
         // GET: api/Vehicles/5
